@@ -1,6 +1,3 @@
-export const productResolver = {
-  getProducts: (parent, {id}, {dataSources}, info) => {
-    console.log(`getProducts: (${parent}, ${id}, ${dataSources}, info)`);
-    return id ? dataSources.productDatasource.getProduct(id) : dataSources.productDatasource.getProducts();
-  }
+export const product = (_, {id}, {dataSources}) => {
+  return id ? dataSources.productDatasource.getProduct(id) : dataSources.productDatasource.getProducts();
 };

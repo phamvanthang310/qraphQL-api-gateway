@@ -4,8 +4,7 @@ import { productTypeDefs } from './product.schema';
 
 const query = `
   type Query {
-    getOrders(id: ID): [Order!]
-    getProducts(id: ID): [Product!]
+    getConsumers(id: ID): [Consumer!]
   }
 `;
 
@@ -15,10 +14,7 @@ const query = `
 
 export const typeDefs = `
 ${orderTypeDefs}
-
 ${consumerTypeDefs}
-
 ${productTypeDefs}
-
 ${query}
 `;

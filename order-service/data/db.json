@@ -1,9 +1,13 @@
 {
+  "ids": {
+    "Order": 5
+  },
   "models": {
     "Order": {
       "1": "{\n    \"id\": 1,\n    \"status\": \"SHIPPED\",\n    \"items\": [1]\n  }",
       "2": "{\n    \"id\": 2,\n    \"status\": \"SHIPPED\",\n    \"items\": [1,2]\n  }",
-      "3": "{\n    \"id\": 3,\n    \"status\": \"CANCELED\",\n    \"items\": [1,2,3]\n  }"
+      "3": "{\n    \"id\": 3,\n    \"status\": \"CANCELED\",\n    \"items\": [1,2,3]\n  }",
+      "4": "{\"id\":4,\"status\":\"COMPLETED\",\"items\":[1,2,3,4]}"
     }
   }
 }

@@ -1,24 +1,13 @@
 import 'regenerator-runtime';
-
-const {orderResolver} = require('./order.resolver');
-const {consumerResolver} = require('./consumer.resolver');
-const {productResolver} = require('./product.resolver');
+import * as consumerResolver from './consumer.resolver';
+import * as orderResolver from './order.resolver';
+import * as productResolver from './product.resolver';
 
 export const resolvers = {
   Query: {
-    ...orderResolver,
-    ...productResolver
-
+    getConsumers: consumerResolver.getConsumers,
   },
-  ...consumerResolver,
-
+  Consumer: consumerResolver.consumer,
+  Order: orderResolver.order,
+  Product: productResolver.product,
 };
-
-
-// module.exports = {
-//   resolvers: {
-//     ...orderResolver,
-//     ...consumerResolver,
-//     ...productResolver
-//   }
-// };

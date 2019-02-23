@@ -11,6 +11,7 @@ export class OrderDatasource extends RESTDataSource {
   }
 
   async getOrder(id) {
+    console.log(`OrderDatasource.getOrder: ${id}`);
     return this.get(`/orders/${id}`);
   }
 }

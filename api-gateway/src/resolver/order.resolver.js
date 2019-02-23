@@ -1,6 +1,6 @@
-export const orderResolver = {
-  getOrders: (parent, {id}, {dataSources}, info) => {
-    console.log(`getOrders: (${parent}, ${id}, ${dataSources}, info)`);
-    return id ? dataSources.orderDatasource.getOrder(id) : dataSources.orderDatasource.getOrders();
+export const order = {
+  items: (parent, _, {dataSources}) => {
+    console.log(`Order.items: (${parent.items})`);
+    return parent.items.map(itemId => dataSources.productDatasource.getProduct(itemId));
   }
 };
