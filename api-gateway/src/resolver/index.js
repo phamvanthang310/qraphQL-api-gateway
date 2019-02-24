@@ -1,4 +1,3 @@
-import 'regenerator-runtime';
 import * as consumerResolver from './consumer.resolver';
 import * as orderResolver from './order.resolver';
 import * as productResolver from './product.resolver';

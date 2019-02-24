@@ -1,9 +1,11 @@
-const {RESTDataSource} = require('apollo-datasource-rest');
+import { RESTDataSource } from 'apollo-datasource-rest';
+import DataLoader from 'dataloader';
 
 export class OrderDatasource extends RESTDataSource {
   constructor() {
     super();
     this.baseURL = 'http://localhost:8001';
+    this.dataloader = new DataLoader(ids => this.getBatchOrder(ids));
   }
 
   async getOrders() {
@@ -11,6 +13,10 @@ export class OrderDatasource extends RESTDataSource {
   }
 
   async getOrder(id) {
-    return this.get(`/orders/${id}`);
+    return this.dataloader.load(id);
+  }
+
+  async getBatchOrder(ids) {
+    return this.get(`/orders?ids=${ids.join(',')}`);
   }
 }
