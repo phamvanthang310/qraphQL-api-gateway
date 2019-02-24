@@ -1,0 +1,9 @@
+{
+  "packages": [
+    "api-gateway",
+    "consumer-service",
+    "order-service",
+    "product-service"
+  ],
+  "version": "1.0.0"
+}

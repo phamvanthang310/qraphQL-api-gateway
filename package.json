@@ -1,0 +1,24 @@
+{
+  "name": "qraphql-api-gateway",
+  "version": "1.0.0",
+  "description": "",
+  "main": "ecosystem.config.js",
+  "scripts": {
+    "build": "lerna run build",
+    "prestart": "npm run build",
+    "start": "pm2 start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phamvanthang310/qraphQL-api-gateway.git"
+  },
+  "author": "ThangPham",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/phamvanthang310/qraphQL-api-gateway/issues"
+  },
+  "homepage": "https://github.com/phamvanthang310/qraphQL-api-gateway#readme",
+  "devDependencies": {
+    "lerna": "^3.13.0"
+  }
+}

@@ -1,5 +1,5 @@
-import { Count, CountSchema, Filter, repository, Where, } from '@loopback/repository';
-import { del, get, getFilterSchemaFor, getWhereSchemaFor, param, patch, post, put, requestBody, } from '@loopback/rest';
+import { repository, } from '@loopback/repository';
+import { get, param, } from '@loopback/rest';
 import { Order } from '../models';
 import { OrderRepository } from '../repositories';
 
@@ -10,31 +10,31 @@ export class OrderController {
   ) {
   }
 
-  @post('/orders', {
-    responses: {
-      '200': {
-        description: 'Order model instance',
-        content: {'application/json': {schema: {'x-ts-type': Order}}},
-      },
-    },
-  })
-  async create(@requestBody() order: Order): Promise<Order> {
-    return await this.orderRepository.create(order);
-  }
-
-  @get('/orders/count', {
-    responses: {
-      '200': {
-        description: 'Order model count',
-        content: {'application/json': {schema: CountSchema}},
-      },
-    },
-  })
-  async count(
-    @param.query.object('where', getWhereSchemaFor(Order)) where?: Where,
-  ): Promise<Count> {
-    return await this.orderRepository.count(where);
-  }
+  // @post('/orders', {
+  //   responses: {
+  //     '200': {
+  //       description: 'Order model instance',
+  //       content: {'application/json': {schema: {'x-ts-type': Order}}},
+  //     },
+  //   },
+  // })
+  // async create(@requestBody() order: Order): Promise<Order> {
+  //   return await this.orderRepository.create(order);
+  // }
+  //
+  // @get('/orders/count', {
+  //   responses: {
+  //     '200': {
+  //       description: 'Order model count',
+  //       content: {'application/json': {schema: CountSchema}},
+  //     },
+  //   },
+  // })
+  // async count(
+  //   @param.query.object('where', getWhereSchemaFor(Order)) where?: Where,
+  // ): Promise<Count> {
+  //   return await this.orderRepository.count(where);
+  // }
 
   @get('/orders', {
     responses: {
@@ -48,26 +48,30 @@ export class OrderController {
       },
     },
   })
-  async find(
-    @param.query.object('filter', getFilterSchemaFor(Order)) filter?: Filter,
-  ): Promise<Order[]> {
-    return await this.orderRepository.find(filter);
+  async batchFind(@param.query.string('ids') idsString: string): Promise<Order[]> {
+    if (!idsString) {
+      return await this.orderRepository.find();
+    }
+
+    const ids = idsString.split(',');
+    const orders = await this.orderRepository.find();
+    return orders.filter(order => ids.includes(String(order.id)));
   }
 
-  @patch('/orders', {
-    responses: {
-      '200': {
-        description: 'Order PATCH success count',
-        content: {'application/json': {schema: CountSchema}},
-      },
-    },
-  })
-  async updateAll(
-    @requestBody() order: Order,
-    @param.query.object('where', getWhereSchemaFor(Order)) where?: Where,
-  ): Promise<Count> {
-    return await this.orderRepository.updateAll(order, where);
-  }
+  // @patch('/orders', {
+  //   responses: {
+  //     '200': {
+  //       description: 'Order PATCH success count',
+  //       content: {'application/json': {schema: CountSchema}},
+  //     },
+  //   },
+  // })
+  // async updateAll(
+  //   @requestBody() order: Order,
+  //   @param.query.object('where', getWhereSchemaFor(Order)) where?: Where,
+  // ): Promise<Count> {
+  //   return await this.orderRepository.updateAll(order, where);
+  // }
 
   @get('/orders/{id}', {
     responses: {
@@ -81,42 +85,43 @@ export class OrderController {
     return await this.orderRepository.findById(id);
   }
 
-  @patch('/orders/{id}', {
-    responses: {
-      '204': {
-        description: 'Order PATCH success',
-      },
-    },
-  })
-  async updateById(
-    @param.path.number('id') id: number,
-    @requestBody() order: Order,
-  ): Promise<void> {
-    await this.orderRepository.updateById(id, order);
-  }
+  //
+  // @patch('/orders/{id}', {
+  //   responses: {
+  //     '204': {
+  //       description: 'Order PATCH success',
+  //     },
+  //   },
+  // })
+  // async updateById(
+  //   @param.path.number('id') id: number,
+  //   @requestBody() order: Order,
+  // ): Promise<void> {
+  //   await this.orderRepository.updateById(id, order);
+  // }
+  //
+  // @put('/orders/{id}', {
+  //   responses: {
+  //     '204': {
+  //       description: 'Order PUT success',
+  //     },
+  //   },
+  // })
+  // async replaceById(
+  //   @param.path.number('id') id: number,
+  //   @requestBody() order: Order,
+  // ): Promise<void> {
+  //   await this.orderRepository.replaceById(id, order);
+  // }
 
-  @put('/orders/{id}', {
-    responses: {
-      '204': {
-        description: 'Order PUT success',
-      },
-    },
-  })
-  async replaceById(
-    @param.path.number('id') id: number,
-    @requestBody() order: Order,
-  ): Promise<void> {
-    await this.orderRepository.replaceById(id, order);
-  }
-
-  @del('/orders/{id}', {
-    responses: {
-      '204': {
-        description: 'Order DELETE success',
-      },
-    },
-  })
-  async deleteById(@param.path.number('id') id: number): Promise<void> {
-    await this.orderRepository.deleteById(id);
-  }
+  // @del('/orders/{id}', {
+  //   responses: {
+  //     '204': {
+  //       description: 'Order DELETE success',
+  //     },
+  //   },
+  // })
+  // async deleteById(@param.path.number('id') id: number): Promise<void> {
+  //   await this.orderRepository.deleteById(id);
+  // }
 }
