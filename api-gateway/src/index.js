@@ -8,7 +8,8 @@ const {dataSources} = require('./datasource');
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  dataSources
+  dataSources,
+  mocks: true
 });
 
 // This `listen` method launches a web-server.  Existing apps
