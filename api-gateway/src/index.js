@@ -1,20 +1,14 @@
-const {ApolloServer} = require('apollo-server');
+import { ApolloServer } from 'apollo-server';
 import '@babel/polyfill';
 
 const {resolvers} = require('./resolver');
 const {typeDefs} = require('./schema');
 const {dataSources} = require('./datasource');
 
-
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  dataSources,
-  playground: {
-    settings: {
-      'editor.theme': 'dark',
-    }
-  },
+  dataSources
 });
 
 // This `listen` method launches a web-server.  Existing apps

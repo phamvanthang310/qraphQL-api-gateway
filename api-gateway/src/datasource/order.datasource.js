@@ -3,7 +3,7 @@ const {RESTDataSource} = require('apollo-datasource-rest');
 export class OrderDatasource extends RESTDataSource {
   constructor() {
     super();
-    this.baseURL = 'http://localhost:8081';
+    this.baseURL = 'http://localhost:8001';
   }
 
   async getOrders() {
@@ -11,7 +11,6 @@ export class OrderDatasource extends RESTDataSource {
   }
 
   async getOrder(id) {
-    console.log(`OrderDatasource.getOrder: ${id}`);
     return this.get(`/orders/${id}`);
   }
 }

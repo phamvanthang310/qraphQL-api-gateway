@@ -16,19 +16,26 @@ const apps = [
     name: 'consumer-service',
     cwd: './consumer-service',
     script: './index.js',
-    port: 8080,
+    port: 8000,
     ...sharedConfig
   }, {
     name: 'order-service',
     cwd: './order-service',
     script: './index.js',
-    port: 8081,
+    port: 8001,
     ...sharedConfig
   }, {
     name: 'product-service',
     cwd: './product-service',
     script: './index.js',
-    port: 8082,
+    port: 8002,
+    instances: 1,
+    ...sharedConfig
+  }, {
+    name: 'api-gateway',
+    cwd: './api-gateway',
+    script: 'dist/index.js',
+    port: 4000,
     instances: 1,
     ...sharedConfig
   }
